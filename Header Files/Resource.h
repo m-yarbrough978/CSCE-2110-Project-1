@@ -1,0 +1,18 @@
+
+
+#ifndef RESOURCE_H
+#define RESOURCE_H
+
+
+using namespace std;
+
+
+
+
+
+
+
+
+
+
+#endif
