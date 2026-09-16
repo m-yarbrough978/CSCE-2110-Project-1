@@ -18,8 +18,6 @@ int main (){
 	cout << "|                                           |" << endl;
 	cout << "+-------------------------------------------+" << endl << endl;
 
-	int choice;
-
 	ifstream ResrcFile; 				//creates the ResrcFile to be used for reading "resources.txt"
 	ResrcFile.open("resources.txt");   //opens "resources.txt" to be read
 	
@@ -48,6 +46,8 @@ int main (){
 		*/
 		
 	}
+
+	int choice;
 	
 	do{
 		
