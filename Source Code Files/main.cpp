@@ -2,7 +2,10 @@
 #include "Reservation.h"
 #include "ReservationManager.h"
 #include <iostream>
-
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cstring>
 
 
 using namespace std;
@@ -17,6 +20,35 @@ int main (){
 
 	int choice;
 
+	ifstream ResrcFile; 				//creates the ResrcFile to be used for reading "resources.txt"
+	ResrcFile.open("resources.txt");   //opens "resources.txt" to be read
+	
+	if(ResrcFile.fail()){ 		//if resources.txt fails to be read
+		
+		cout << "Error reading the Resource file." << endl << endl; //output error message
+		return 0; //exit program
+	}
+	else{
+		cout << "Resource file read successfully." <<endl << endl; //output success message
+	}
+	
+	vector<Resource> resrcVect;
+	char line[100];
+	string tempStr;
+	int count1, count2;
+	
+	while(ResrcFile.getline(line, 100)){
+		
+		cout << line << endl << endl;
+
+		/*
+		This is a test for seeing if the cstring 'line' is being assigned to the
+		lines of "resource.txt". It will be changed later to read the lines for the
+		specific information of the resources, which will then be put into resrcVect.
+		*/
+		
+	}
+	
 	do{
 		
 
