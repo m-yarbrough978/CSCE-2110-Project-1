@@ -1,6 +1,7 @@
 #include "Waiting.h"
 #include <iostream>
 #include <string>
+#include <queue>
 /* 
 
 Add student to waiting list : add students to created waiting list (function)
