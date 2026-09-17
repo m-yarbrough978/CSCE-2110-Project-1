@@ -13,7 +13,7 @@ using namespace std;
 
 int main() {
 
-Queue<string> waitingList;
+queue<string> waitingList;
 
 int choice;
 string student;
