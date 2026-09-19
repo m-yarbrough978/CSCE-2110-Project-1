@@ -53,16 +53,22 @@ int main (){
 			
 		}
 		else if(choice == 4){
-			
-			
+			string studentName;
+			int resourceID;
+
+			cout << "Enter student name: ";
+			cin >> studentName;
+
+			cout << "Enter resource ID: ";
+			cin >> resourceID;
+
+			addStudent(list, studentName, ResourceID);	
 		}
 		else if(choice == 5){
-			
-			
+			removeStudent(list);
 		}
 		else if(choice == 6){
-			
-			
+			displayWaitingList(list);	
 		}
 		else if(choice == 7){
 			
