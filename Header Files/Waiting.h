@@ -2,19 +2,18 @@
 #define WAITING_H
 
 #include <string>
+#include <queue>
 using namespace std;
 
 struct Student
 {
   string name;  
   int resourceID;
-  Student* next;
 };
 
 struct Waiting
 {
-  Student* front; 
-  Student* rear;
+  queue<Student> students;
 };
 
 void addStudent(Waiting& list, string name, int resourceID);
