@@ -14,8 +14,8 @@ struct CancellationHistory
   CancelledReservation* top;
 };
 
-void storeCancelledReservation();
-void restoreReservation();
-void displayCancellationHistory();
+void storeCancelledReservation(CancellationHistory& history, Reservation reservation);
+void restoreReservation(CancellationHistory& history);
+void displayCancellationHistory(CancellationHistory& history);
 
 #endif
