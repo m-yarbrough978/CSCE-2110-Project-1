@@ -71,20 +71,20 @@ int main (){
 			displayWaitingList(list);	
 		}
 		else if(choice == 7){
-			
+			Reservation restored = restoreReservation(cancellationHistory);
 			
 		}
 		else if(choice == 8){
-			
+			displayCancellationHistory(cancellationHistory);
 			
 		}
-		else if((choice < 1) || (choice > 9)){
+		else if((choice < 0) || (choice > 10)){
 			
 			cout << "Invalid System Choice." << endl << endl;
 			
 		}
 		
-	}while(choice != 9);
+	}while(choice != 0);
   
  
 	cout << "Thank you for using the Campus Reservation system. Goodbye!" << endl;
