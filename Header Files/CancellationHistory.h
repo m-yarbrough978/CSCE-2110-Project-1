@@ -1,17 +1,13 @@
 #ifndef CANCELLATIONHISTORY_H
 #define CANCELLATIONHISTORY_H
 
+#include <stack>
 #include "Reservation.h"
-
-struct CancelledReservation
-{
-  Reservation reservation;
-  CancelledReservation* next;
-};
+using namespace std;
 
 struct CancellationHistory
 {
-  CancelledReservation* top;
+  stack<Reservation> reservations;
 };
 
 void storeCancelledReservation(CancellationHistory& history, Reservation reservation);
