@@ -1,6 +1,8 @@
 #include "Resource.h"
 #include "Reservation.h"
 #include "ReservationManager.h"
+#include "Waiting.h"
+#include "CancellationHistory.h"
 #include <iostream>
 
 
