@@ -17,8 +17,8 @@ struct Waiting
   Student* rear;
 };
 
-void addStudent();
-void removeStudent();
-void displayWaitingList();
+void addStudent(Waiting& list, string name, int resourceID);
+void removeStudent(Waiting& list);
+void displayWaitingList(Waiting& list);
 
 #endif
