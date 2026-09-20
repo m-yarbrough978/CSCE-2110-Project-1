@@ -147,7 +147,7 @@ int main (){
 		
 	}
 
-	int choice;
+	string choice;
 	
 	do{
 		
@@ -168,7 +168,7 @@ int main (){
 		cout << "Enter your choice: ";
 		cin >> choice;
 		
-		if(choice == 1){
+		if(choice == "1"){
 
 			cout << "+----------------------------------------------------------------------------+" << endl;
 			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
@@ -186,15 +186,15 @@ int main (){
 			cout << "+----------------------------------------------------------------------------+" << endl << endl;
 			
 		}
-		else if(choice == 2){
+		else if(choice == "2"){
 			
 			
 		}
-		else if(choice == 3){
+		else if(choice == "3"){
 			
 			
 		}
-		else if(choice == 4){
+		else if(choice == "4"){
 			string studentName;
 			int resourceID;
 
@@ -206,39 +206,39 @@ int main (){
 
 			addStudent(list, studentName, resourceID);	
 		}
-		else if(choice == 5){
+		else if(choice == "5"){
 			removeStudent(list);
 		}
-		else if(choice == 6){
+		else if(choice == "6"){
 			displayWaitingList(list);	
 		}
-		else if(choice == 7){
+		else if(choice == "7"){
 			Reservation restored = restoreReservation(history);
 			
 		}
-		else if(choice == 8){
+		else if(choice == "8"){
 			displayCancellationHistory(history);
 			
 		}
-		else if(choice == 9){
+		else if(choice == "9"){
 			
 			
 		}
-		else if(choice == 10){
+		else if(choice == "10"){
 			
 			
 		}
 			
-		else if((choice < 0) || (choice > 10)){
+		else if(choice != "0"){
 			
-			cout << "Invalid System Choice." << endl << endl;
+			cout << endl <<"Invalid System Choice." << endl << endl;
 			
 		}
 		
-	}while(choice != 0);
+	}while(choice != "0");
   
  
-	cout << "Thank you for using the Campus Reservation system. Goodbye!" << endl << endl;
+	cout << endl << "Thank you for using the Campus Reservation system. Goodbye!" << endl << endl;
  
 	return 0;
 }
