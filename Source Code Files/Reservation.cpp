@@ -1,6 +1,8 @@
 #include "Reservation.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <sstream>
 Reservation::Reservation()
     : reservationId(0), studentId(""), resourceId(""), date(""),
       startHour(0), endHour(0) {
