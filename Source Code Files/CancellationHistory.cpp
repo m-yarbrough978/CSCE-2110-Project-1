@@ -5,11 +5,9 @@ using namespace std;
 
 void storeCancelledReservation(CancellationHistory& history, Reservation reservation)
 {
-  //doesn't keep old linked-list value
-  reservation.next = nullptr;
   history.reservations.push(reservation);
 
-  cout << "Reservation " << reservation.id << " was added to cancellation history." << endl;
+  cout << "Reservation " << reservation.getReservationId() << " was added to cancellation history." << endl;
 }
 
 Reservation restoreReservation(CancellationHistory& history)
@@ -17,16 +15,15 @@ Reservation restoreReservation(CancellationHistory& history)
   if(history.reservations.empty()){
     cout << "There are no cancelled reservations to restore." << endl;
 
-    Reservation emptyReservation = {};
+    Reservation emptyReservation;
     return emptyReservation;
   }
 
   Reservation restored = history.reservations.top();
 
   history.reservations.pop();
-  restored.next = nullptr;
 
-  cout << "Reservation " << restored.id << " was restored." << endl;
+  cout << "Reservation " << restored.getReservationId() << " was restored." << endl;
 
   return restored;
 }
@@ -40,21 +37,25 @@ void displayCancellationHistory(CancellationHistory history)
 
   cout << "\n--- Cancellation History ---" << endl;
 
-  while(!history.reservations.empty()){
-    Reservation reservation = history.reservations.top();
+  stack<Reservation> temp = history.reservations;
 
-    cout << "Reservation ID: " << reservation.id << endl;
+  while(!temp.empty()){
+    Reservation reservation = temp.top();
 
-    cout << "Student: " << reservation.studentName << endl;
+    cout << "Reservation ID: " << reservation.getReservationId() << endl;
 
-    cout << "Resource ID: " << reservation.resourceID << endl;
+    cout << "Student: " << reservation.getStudentId() << endl;
 
-    cout << "Date: " << reservation.date << endl;
+    cout << "Resource ID: " << reservation.getResourceId() << endl;
 
-    cout << "Time: " << reservation.time << endl;
+    cout << "Date: " << reservation.getDate() << endl;
+
+    cout << "Start Time: " << reservation.getStartHour() << ":00" << endl;
+
+    cout << "End Time: " << reservation.getEndHour() << ":00" << endl;
 
     cout << endl;
 
-    history.reservations.pop();
+    temp.pop();
   }
 }
