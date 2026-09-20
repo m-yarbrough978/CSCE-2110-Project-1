@@ -220,6 +220,15 @@ int main (){
 			displayCancellationHistory(history);
 			
 		}
+		else if(choice == 9){
+			
+			
+		}
+		else if(choice == 10){
+			
+			
+		}
+			
 		else if((choice < 0) || (choice > 10)){
 			
 			cout << "Invalid System Choice." << endl << endl;
