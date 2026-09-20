@@ -15,7 +15,7 @@ The program allows users to view campus resources, create and cancel reservation
 ## How the Program Works
 ## Team Members 
 - Micah Yabrough
-- Dabira olubobola
+- Dabira Olubobola
 - Jayden Thompson
 
 
