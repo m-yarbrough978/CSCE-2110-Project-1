@@ -4,10 +4,8 @@
 #include "Waiting.h"
 #include "CancellationHistory.h"
 #include <iostream>
-
-
-
 using namespace std;
+
 int main (){
 
 	Waiting list;
