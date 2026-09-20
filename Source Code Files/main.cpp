@@ -10,7 +10,164 @@
 #include <string>
 #include <cstring>
 #include <iomanip>
-
+// Helpers for the reservation menu paths.
+// ---------------------------------------------------------------------------
+ 
+// Reads the next int safely. Without this, typing a letter at the menu puts
+// cin into a fail state and the do-while spins forever.
+bool readInt(int& value) {
+    cin >> value;
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        return false;
+    }
+    return true;
+}
+ 
+void createReservationFlow(ReservationManager& manager) {
+    string studentId;
+    string resourceId;
+    string date;
+    int start = 0;
+    int end = 0;
+ 
+    cout << "\n--- Create Reservation ---" << endl;
+ 
+    cout << "Enter student ID: ";
+    cin >> studentId;
+ 
+    cout << "Enter resource ID (e.g. ROOM-101): ";
+    cin >> resourceId;
+ 
+    cout << "Enter date (YYYY-MM-DD): ";
+    cin >> date;
+ 
+    cout << "Enter start hour (" << ReservationManager::OPENING_HOUR
+         << "-" << ReservationManager::CLOSING_HOUR << "): ";
+    if (!readInt(start)) {
+        cout << "Start hour must be a number." << endl << endl;
+        return;
+    }
+ 
+    cout << "Enter end hour: ";
+    if (!readInt(end)) {
+        cout << "End hour must be a number." << endl << endl;
+        return;
+    }
+ 
+    int newId = -1;
+    ReservationStatus status = manager.createReservation(studentId, resourceId,
+                                                         date, start, end, newId);
+ 
+    if (status == RES_OK) {
+        cout << "Reservation created. ID = " << newId << endl;
+        const Reservation* created = manager.findReservation(newId);
+        if (created != nullptr) {
+            cout << "  " << Reservation::header() << endl;
+            cout << "  " << created->toString() << endl;
+        }
+    } else {
+        cout << "Reservation rejected: "
+             << ReservationManager::statusMessage(status) << endl;
+ 
+        if (status == RES_RESOURCE_CONFLICT || status == RES_DAILY_LIMIT) {
+            cout << "Use menu option 4 to join the waiting list for this resource."
+                 << endl;
+            // TODO (team): once we agree on one resource-ID type, call the
+            // queue straight from here instead of sending the user to option 4:
+            //     addStudent(list, studentId, resourceId);
+            // Right now Waiting.h takes an int resource ID and the reservation
+            // module uses a string, so the call will not compile as-is.
+        }
+    }
+    cout << endl;
+}
+ 
+void cancelReservationFlow(ReservationManager& manager,
+                           CancellationHistory& history) {
+    int reservationId = 0;
+    string studentId;
+ 
+    cout << "\n--- Cancel Reservation ---" << endl;
+ 
+    if (manager.activeCount() == 0) {
+        cout << "There are no active reservations to cancel." << endl << endl;
+        return;
+    }
+ 
+    manager.displayActiveReservations();
+ 
+    cout << "Enter reservation ID to cancel: ";
+    if (!readInt(reservationId)) {
+        cout << "Reservation ID must be a number." << endl << endl;
+        return;
+    }
+ 
+    cout << "Enter your student ID: ";
+    cin >> studentId;
+ 
+    Reservation cancelled;
+    ReservationStatus status = manager.cancelReservation(reservationId,
+                                                         studentId, cancelled);
+ 
+    if (status == RES_OK) {
+        cout << "Cancelled:" << endl;
+        cout << "  " << Reservation::header() << endl;
+        cout << "  " << cancelled.toString() << endl;
+ 
+        // Hand the record to the cancellation stack so it can be restored.
+        addCancellation(history, cancelled);
+    } else {
+        cout << "Cancellation failed: "
+             << ReservationManager::statusMessage(status) << endl;
+    }
+    cout << endl;
+}
+ 
+void restoreCancellationFlow(ReservationManager& manager,
+                             CancellationHistory& history) {
+    cout << "\n--- Restore Cancellation ---" << endl;
+ 
+    Reservation restored = restoreReservation(history);   // pops the stack
+ 
+    if (restored.getReservationId() <= 0) {
+        cout << "Cancellation history is empty - nothing to restore."
+             << endl << endl;
+        return;
+    }
+ 
+    // Put it back into the linked list. This can still fail: the slot may have
+    // been taken by someone else after the cancellation.
+    ReservationStatus status = manager.restoreReservation(restored);
+ 
+    if (status == RES_OK) {
+        cout << "Restored:" << endl;
+        cout << "  " << Reservation::header() << endl;
+        cout << "  " << restored.toString() << endl;
+    } else {
+        cout << "Could not restore reservation "
+             << restored.getReservationId() << ": "
+             << ReservationManager::statusMessage(status) << endl;
+    }
+    cout << endl;
+}
+ 
+void generateReport(ReservationManager& manager, CancellationHistory& history) {
+    cout << "\n=============== SYSTEM REPORT ===============" << endl;
+ 
+    cout << "\nAll resources:" << endl;
+    displayResources();
+ 
+    cout << endl;
+    manager.displayActiveReservations();
+ 
+    cout << "\nCancellation history:" << endl;
+    displayCancellationHistory(history);
+ 
+    cout << "\nTotal active reservations: " << manager.activeCount() << endl;
+    cout << "=============================================" << endl << endl;
+}
 
 using namespace std;
 
