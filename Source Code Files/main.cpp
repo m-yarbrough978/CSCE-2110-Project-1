@@ -12,13 +12,13 @@ int main (){
 	Waiting list;
 	CancellationHistory history;
 	
-	cout << "+-------------------------------------------+" << endl;
-	cout << "|     Computer Science and Engineering      |" << endl;
-	cout << "|          CSCE 2110 - Project 1            |" << endl;
-	cout << "| Micah Yarbrough micahyarbrough@my.unt.edu |" << endl;
-	cout << "| Dabira olubobola Oluwadabiraolubobola@my.unt.edu|" << endl; 
-	cout << "| Jayden Thompson jaydenthompson2#my.unt.edu|" << endl;
-	cout << "+-------------------------------------------+" << endl << endl;
+	cout << "+--------------------------------------------------+" << endl;
+	cout << "|         Computer Science and Engineering         |" << endl;
+	cout << "|              CSCE 2110 - Project 1               |" << endl;
+	cout << "|     Micah Yarbrough micahyarbrough@my.unt.edu    |" << endl;
+	cout << "| Dabira olubobola Oluwadabiraolubobola@my.unt.edu |" << endl; 
+	cout << "|    Jayden Thompson jaydenthompson2@my.unt.edu    |" << endl;
+	cout << "+--------------------------------------------------+" << endl << endl;
 
 	int choice;
 
