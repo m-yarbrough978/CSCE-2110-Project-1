@@ -63,7 +63,7 @@ int main (){
 			cout << "Enter resource ID: ";
 			cin >> resourceID;
 
-			addStudent(list, studentName, ResourceID);	
+			addStudent(list, studentName, resourceID);	
 		}
 		else if(choice == 5){
 			removeStudent(list);
@@ -72,11 +72,11 @@ int main (){
 			displayWaitingList(list);	
 		}
 		else if(choice == 7){
-			Reservation restored = restoreReservation(cancellationHistory);
+			Reservation restored = restoreReservation(history);
 			
 		}
 		else if(choice == 8){
-			displayCancellationHistory(cancellationHistory);
+			displayCancellationHistory(history);
 			
 		}
 		else if((choice < 0) || (choice > 10)){
