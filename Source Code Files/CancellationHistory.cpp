@@ -28,7 +28,7 @@ Reservation restoreReservation(CancellationHistory& history)
   return restored;
 }
 
-void displayCancellationHistory(CancellationHistory history)
+void displayCancellationHistory(CancellationHistory& history)
 {
   if(history.reservations.empty()){
     cout << "No cancellation history." << endl;
