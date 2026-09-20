@@ -186,7 +186,7 @@ int main (){
 				
 			}
 			
-			cout << "+----------------------------------------------------------------------------+" << endl;
+			cout << "+----------------------------------------------------------------------------+" << endl << endl;
 			
 		}
 		else if(choice == 2){
@@ -232,7 +232,7 @@ int main (){
 	}while(choice != 0);
   
  
-	cout << "Thank you for using the Campus Reservation system. Goodbye!" << endl;
+	cout << "Thank you for using the Campus Reservation system. Goodbye!" << endl << endl;
  
 	return 0;
 }
