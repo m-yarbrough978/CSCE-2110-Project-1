@@ -27,7 +27,7 @@ void removeStudent(Waiting& list)
     }
 
     cout << list.students.front().name << " was removed from the waiting list." << endl;
-    list students.pop();
+    list.students.pop();
 }
 
 void displayWaitingList(Waiting& list)
@@ -36,12 +36,13 @@ void displayWaitingList(Waiting& list)
         cout << "The waiting list is empty." << endl;
         return;
     }
-
     cout << "\n--- Waiting List ---" << endl;
+    
+    queue<Student> temp = list.students;
 
-    while(list.students.empty()){
-        cout << "Student: " << list.students.front().name << " | Resource ID: " << list.students.front().resoruceID << endl;
-        list.students.pop();
+    while(!temp.empty()){
+        cout << "Student: " << temp.front().name << " | Resource ID: " << temp.front().resourceID << endl;
+        temp.pop();
     }
 }
 
