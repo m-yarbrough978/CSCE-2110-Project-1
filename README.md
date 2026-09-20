@@ -13,5 +13,10 @@ The program allows users to view campus resources, create and cancel reservation
 - Sort resources
 - Generate a system report
 ## How the Program Works
+## Team Members 
+- Micah Yabrough
+- Dabira Oluwadabira
+- Jayden Thompson
+
 
 
