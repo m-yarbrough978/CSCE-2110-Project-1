@@ -1,11 +1,9 @@
 #include "Waiting.h"
 #include <iostream>
 /* 
-
 Add student to waiting list : add students to created waiting list (function)
 Remove student from waiting list : remove students from created waiting list (function)
 Display waiting list : use a print statement to display created waiting list (print Display)
-
 */
 using namespace std;
 
