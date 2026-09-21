@@ -17,7 +17,7 @@ When the program starts, a text box introducing the contributors pops up. The pr
 ## How the Program Works
 The program works by creating header and source files for different parts of the program (i.e. Waiting.h and Waiting.cpp) and then calling the functions defined in those files from main.cpp.
 ## Team Members 
-- Micah Yabrough
+- Micah Yarbrough
 - Dabira Olubobola
 - Jayden Thompson
 
