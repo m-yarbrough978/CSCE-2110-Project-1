@@ -15,7 +15,9 @@ using namespace std;
 int main (){
 
 	Waiting list;
-	CancellationHistory history; 
+	CancellationHistory history;
+	ReservationManager resrvList;
+	
 	cout << "+--------------------------------------------------+" << endl;
 	cout << "|         Computer Science and Engineering         |" << endl;
 	cout << "|              CSCE 2110 - Project 1               |" << endl;
@@ -148,6 +150,7 @@ int main (){
 	}
 
 	string choice;
+	int newIDOut = 0;
 	
 	do{
 		
@@ -187,11 +190,39 @@ int main (){
 			
 		}
 		else if(choice == "2"){
+			string studentID, resourceID, date;
+			int startHour, endHour;
 			
+			cout << endl << "Enter Student ID: ";
+			cin >> studentID;
+			cout << endl << "Enter Resource ID: ";
+			cin >> resourceID;
+			cout << endl << "Enter date (YYYY-MM-DD): ";
+			cin >> date;
+			cout << endl << "Enter start hour: ";
+			cin >> startHour;
+			cout << endl << "Enter end hour: ";
+			cin >> endHour;
+			
+			resrvList.createReservation(studentID, resourceID, date, startHour, endHour, newIDOut);
+			
+			++newIDOut;
+			
+			cout << endl;
 			
 		}
 		else if(choice == "3"){
+			int resrvID;
+			Reservation cancelledOut;
 			
+			cout << endl << "Enter reservation ID: ";
+			cin >> resrvID;
+			
+			resrvList.cancelReservation(resrvID, cancelledOut);
+			
+			--newIDOut;
+			
+			cout << endl;
 			
 		}
 		else if(choice == "4"){
