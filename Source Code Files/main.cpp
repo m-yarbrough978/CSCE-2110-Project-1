@@ -1,4 +1,5 @@
 #include "Resource.h"
+#include "ResourceManager.h"
 #include "Reservation.h"
 #include "ReservationManager.h"
 #include "Reservationlist.h"
@@ -106,122 +107,31 @@ int main (){
 	}
 	
 	vector<Resource> resrcVect;
-	Resource tempRsrc;
-	char line[100];
-	string tempStr;
-	int lineCount = 1;
-	int i;
-	
-	while(ResrcFile.getline(line, 100)){
-		
-		int barCount = 0;
-		int count, countA, countB, countC;
-		
-		count = 0;
-		countA = 0;
-		countB = 0;
-		countC = 0;
-		
-		for(i = 0; i < 100; ++i){
-			
-			++count;
-			
-			if(line[i] == '|'){
-				
-				++barCount;
-				
-				if(barCount == 1){
-					
-					tempStr = line;
-					tempStr.erase(count - 1);
-					tempRsrc.SetID(tempStr);
-					countA = count;
-				}
-				else if(barCount == 2){
-					
-					tempStr = line;
-					tempStr.erase(0, countA);
-					
-					if((lineCount < 5) || (lineCount == 16)){
-						tempStr.erase(14);
-					}
-					else if((lineCount >= 5) && (lineCount < 9) || (lineCount == 17)){
-						tempStr.erase(9);
-					}
-					else if((lineCount == 9) || (lineCount == 10) || (lineCount == 14) || (lineCount == 18)){
-						tempStr.erase(13);
-					}
-					else if((lineCount == 11) || (lineCount == 19)){
-						tempStr.erase(10);
-					}
-					else if(lineCount == 12){
-						tempStr.erase(12);
-					}
-					else if((lineCount == 13) || (lineCount == 15)){
-						tempStr.erase(11);
-					}
-					else if(lineCount == 20){
-						tempStr.erase(16);
-					}
-					
-					tempRsrc.SetName(tempStr);
-					countB = count;
-				}
-				else if(barCount == 3){
-					tempStr = line;
-					tempStr.erase(0, countB);
-					
-					if((lineCount < 5) || (lineCount == 16) || (lineCount == 9) || (lineCount == 10) || (lineCount == 18)){
-						tempStr.erase(10);
-					}
-					else if((lineCount >= 5) && (lineCount < 9) || (lineCount == 17)){
-						tempStr.erase(6);
-					}
-					else if((lineCount == 11) || (lineCount == 12) || (lineCount == 13) || (lineCount == 19)){
-						tempStr.erase(13);
-					}
-					else if((lineCount == 14) || (lineCount == 15) || (lineCount == 20)){
-						tempStr.erase(20);
-					}
-					
-					tempRsrc.SetType(tempStr);
-					countC = count;
-					
-					tempStr = line;
-					tempStr.erase(0,countC);
-					tempRsrc.SetStatus(tempStr);
-				}
-			}
-			else if(line[i] != '|'){
-				
-				continue;
-			}
-			
-		}
-		
-		resrcVect.push_back(tempRsrc);
-		
-		++lineCount;
-		
-	}
+	vector<Resource> IDsortedResrcVec;
+	ResourceManager resrcMan;
+
+	resrcVect = resrcMan.createVector(ResrcFile);
+	IDsortedResrcVec = resrcVect;
 
 	string choice;
 	int newIDOut = 0;
 	
 	do{
 		
-
+		cout << endl;
 		cout << "<<<  Campus Resource Reservation System  >>>" << endl;
 		cout << "1. View Resources                           " << endl;
-		cout << "2. Create Reservation                       " << endl;
-		cout << "3. Cancel Reservation                       " << endl;
-		cout << "4. Add Students to Waiting List             " << endl;
-		cout << "5. Remove Students from Waiting List        " << endl;
-		cout << "6. Display Waiting List                     " << endl;
-		cout << "7. Restore Cancellation                     " << endl;
-		cout << "8. Display Cancellation History             " << endl;
-		cout << "9. Sort Resources                           " << endl;
-		cout << "10. Generate Report                          " << endl;
+		cout << "2. Search Resources                         " << endl;
+		cout << "3. Sort Resources                           " << endl;
+		cout << "4. Create Reservation                       " << endl;
+		cout << "5. Cancel Reservation                       " << endl;
+		cout << "6. Add Students to Waiting List             " << endl;
+		cout << "7. Remove Students from Waiting List        " << endl;
+		cout << "8. Display Waiting List                     " << endl;
+		cout << "9. Restore Cancellation                     " << endl;
+		cout << "10. Display Cancellation History            " << endl;
+		cout << "11. Sort Resources                          " << endl;
+		cout << "12. Generate Report                         " << endl;
 		cout << "0. Exit                                     " << endl << endl;
 		
 		cout << "Enter your choice: ";
@@ -229,16 +139,50 @@ int main (){
 		
 		if(choice == "1"){
 
+			resrcMan.Print(resrcVect);
+			
+		}
+		else if(choice == "2"){
+			
+			string resrcID;
+			Resource tempResource;
+			
+			cout << "Enter Resource ID (ex: R100): " << endl;
+			cin >> resrcID;
+			
+			tempResource = resrcMan.SearchByID(resrcVect, resrcID);
+	
+			cout << endl;
 			cout << "+----------------------------------------------------------------------------+" << endl;
 			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
 			cout << "|----------------------------------------------------------------------------|" << endl;
+			cout << left << "|" << setw(12) << tempResource.GetID() << "|";
+			cout << setw(17) << tempResource.GetName() << "|";
+			cout << setw(21) << tempResource.GetType() << "|";
+			cout << setw(23) << tempResource.GetStatus() << "|" << endl;
+			cout << "+----------------------------------------------------------------------------+" << endl << endl;
+
+		}
+		else if(choice == "3"){
+
+			cout << endl;
+			cout << "What would you like to sort by?" << endl;
+			cout << "I - ID" << endl;
+			cout << "N - Name" << endl;
+			cout << "T - Type" << endl;
+			cout << "A - Availability" << endl;
 			
-			for(i = 0; i < 20; ++i){
+			cin >> choice;
+			
+			if((choice == "I") || (choice == "i") || (choice == "N") || (choice == "n") || (choice == "T") || (choice == "t") || (choice == "A") || (choice == "a")){
 				
-				cout << left << "|" << setw(12) << resrcVect[i].GetID() << "|";
-				cout << setw(17) << resrcVect[i].GetName() << "|";
-				cout << setw(21) << resrcVect[i].GetType() << "|";
-				cout << setw(23) << resrcVect[i].GetStatus() << "|" << endl;
+				resrcMan.sort(choice, resrcVect, 0, 19);
+				cout << endl << "Use Menu Option 1 to view the sorted resources." << endl;
+				
+			}
+			else{
+				
+				cout << endl << "Invalid Resource Identifier." << endl;
 				
 			}
 			
@@ -319,47 +263,13 @@ int main (){
 				history.reservations.push(restored);
 			
 		}
-		else if(choice == "8"){
+		else if(choice == "10"){
 			displayCancellationHistory(history);
 			
 		}
-		else if(choice == "9"){
-			if(!resrcVect.empty())
-			{
-				mergeSortResources(resrcVect, 0, static_cast<int>(resrcVect.size())-1);
-			}
-
-			cout << "\nResources sorted alphabetically by name:\n\n";
-
-			cout << "+----------------------------------------------------------------------------+" << endl;
-			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
-			cout << "+----------------------------------------------------------------------------+" << endl;
-
-			for(size_t i =0; i < resrcVect.size(); ++i)
-				{
-					cout << left << "|" << setw(12) << resrcVect[i].GetID() << "|";
-					cout << setw(17) << resrcVect[i].GetName() << "|";
-					cout << setw(21) << resrcVect[i].GetType() << "|";
-					cout << setw(23) << resrcVect[i].GetStatus() << "|" << endl;
-				}
-
-			cout << "+----------------------------------------------------------------------------+" << endl << endl;
-					
-		}
-		else if(choice == "10"){
-			cout << "Total students waiting: " << countWaitingStudents(list) << endl;
-
-			for(const auto& resource : resrcVect) {
-				int waiting = countWaitingForResource(list, resource.GetID());
-
-				cout << resource.GetID() << ": " << waiting << " student(s) waiting" << endl;
+		else if(choice != "0")){
 			
-			}
-		}
-			
-		else if(choice != "0"){
-			
-			cout << endl <<"Invalid System Choice." << endl << endl;
+			cout << "Invalid System Choice." << endl;
 			
 		}
 		
