@@ -227,7 +227,7 @@ int main (){
 			cout << ReservationManager::statusMessage(status) << endl;
 
 			if(status == RES_OK) {
-				storeCancellationReservation(history, cancelledOut);
+				storeCancelledReservation(history, cancelledOut);
 				
 			cout << endl;
 			
