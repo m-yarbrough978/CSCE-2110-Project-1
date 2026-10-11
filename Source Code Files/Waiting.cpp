@@ -50,7 +50,7 @@ int countWaitingForResource(const Waiting& list, const std::string& resourceID) 
     int count = 0;
 
     // Copy the queue so the original waiting list is preserved.
-    auto studentsCopy = list.students;
+   queue<Student> studentsCopy = list.students;
 
     while(!studentsCopy.empty()) {
         if(studentsCopy.front().resourceID == resourceID) {
@@ -63,8 +63,9 @@ int countWaitingForResource(const Waiting& list, const std::string& resourceID) 
     return count;
 }
 
+//Count all students in the waiting list.
 int countWaitingStudents(const Waiting& list){
-    reutrn static_cast<int>(list.students.size());
+    return static_cast<int>(list.students.size());
 }
 
 
