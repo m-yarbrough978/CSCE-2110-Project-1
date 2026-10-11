@@ -63,5 +63,9 @@ int countWaitingForResource(const Waiting& list, const std::string& resourceID) 
     return count;
 }
 
+int countWaitingStudents(const Waiting& list){
+    reutrn static_cast<int>(list.students.size());
+}
+
 
 
