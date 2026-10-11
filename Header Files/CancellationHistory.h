@@ -3,15 +3,16 @@
 
 #include <stack>
 #include "Reservation.h"
-using namespace std;
 
 struct CancellationHistory
 {
-  stack<Reservation> reservations;
+  std::stack<Reservation> reservations;
 };
 
 void storeCancelledReservation(CancellationHistory& history, Reservation reservation);
+
 Reservation restoreReservation(CancellationHistory& history);
-void displayCancellationHistory(CancellationHistory& history);
+
+void displayCancellationHistory(const CancellationHistory& history);
 
 #endif

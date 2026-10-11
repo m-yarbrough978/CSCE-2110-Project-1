@@ -4,7 +4,6 @@
 #include <string>
 #include <queue>
 
-
 struct Student
 {
   std::string name;  

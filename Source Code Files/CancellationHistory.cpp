@@ -31,31 +31,17 @@ Reservation restoreReservation(CancellationHistory& history)
 void displayCancellationHistory(CancellationHistory& history)
 {
   if(history.reservations.empty()){
-    cout << "No cancellation history." << endl;
+    std::cout << "No cancellation history." << endl;
     return;
   }
 
-  cout << "\n--- Cancellation History ---" << endl;
+  std::cout << "\n--- Cancellation History ---" << endl;
+  std::cout << Reservation::header() << std::endl;
 
-  stack<Reservation> temp = history.reservations;
-
-  while(!temp.empty()){
-    Reservation reservation = temp.top();
-
-    cout << "Reservation ID: " << reservation.getReservationId() << endl;
-
-    cout << "Student: " << reservation.getStudentId() << endl;
-
-    cout << "Resource ID: " << reservation.getResourceId() << endl;
-
-    cout << "Date: " << reservation.getDate() << endl;
-
-    cout << "Start Time: " << reservation.getStartHour() << ":00" << endl;
-
-    cout << "End Time: " << reservation.getEndHour() << ":00" << endl;
-
-    cout << endl;
-
-    temp.pop();
+  auto historyCopy = history.reservations;
+  
+  while(!historyCopy.empty()){
+    historyCopy.top.display();
+    historyCopy.pop();
   }
 }
