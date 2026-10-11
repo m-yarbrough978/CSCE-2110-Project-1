@@ -12,6 +12,62 @@
 #include <iomanip>
 #include <limits> 
 using namespace std; 
+
+void mergeResources(vector<Resources>& resources, int left, int mid, int right)
+{
+	vector<Resource> temp;
+	int i = left;
+	int j = mid +1;
+
+	// Merge the two sorted halves
+	while(i <= mid && j <= right)
+	{
+		if(resources[i].GetName() <= resources[j].GetNmae())
+		{
+			temp.push_back(resources[i]);
+			++i;
+		}
+		else
+		{
+			temp.push_back(resources[j]);
+			++j;
+		}
+	}
+
+	// Copy any remaining resources from the left half
+	while (i <= mid)
+	{
+		temp.push_back(resources[i]);
+		++i;
+	}
+
+	// Copy any remaining resources from the right half
+	while (j <= right)
+	{
+		temp.push_back(resources[j]);
+		++j;
+	}
+	// Copy the merged resources back into the original vector.
+	for(int k =0; k < static_cast<int>(temp.size()); ++k)
+	{
+	resources[left+k] = temp[k];
+	}
+}
+
+void mergeSortResources(vector<Resource>& resources, int left, int right)
+{
+	if (left >= right)
+	{
+		return;
+	}
+
+	int mid = left +(right - left) / 2;
+
+	mergeSortResources(resources, left, mid);
+	mergeSortResources(resources, mid + 1, right);
+	mergeSortResources(resources, left, mid, right);
+}
+
 int main (){
 
 	Waiting list;
@@ -268,8 +324,27 @@ int main (){
 			
 		}
 		else if(choice == "9"){
-			
-			
+			if(!resrcVect.empty())
+			{
+				mergeSortResources(resrcVect, 0, static_cast<int>(resrcVect.size())-1);
+			}
+
+			cout << "\nResources sorted alphabetically by name:\n\n";
+
+			cout << "+----------------------------------------------------------------------------+" << endl;
+			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
+			cout << "+----------------------------------------------------------------------------+" << endl;
+
+			for(size_t i =0; i < resrcVect.size(); ++i)
+				{
+					cout << left << "|" << setw(12) << resrcVect[i].GetID() << "|";
+					cout << setw(17) << resrcVect[i].GetName() << "|";
+					cout << setw(21) << resrcVect[i].GetType() << "|";
+					cout << setw(23) << resrcVect[i].GetStatus() << "|" << endl;
+				}
+
+			cout << "+----------------------------------------------------------------------------+" << endl << endl;
+					
 		}
 		else if(choice == "10"){
 			cout << "Total students waiting: " << countWaitingStudents(list) << endl;
