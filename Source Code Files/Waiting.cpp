@@ -35,15 +35,21 @@ void removeStudent(Waiting& list)
 void displayWaitingList(Waiting& list)
 {
     if(list.students.empty()){
-        cout << "The waiting list is empty." << endl;
+        std::cout << "The waiting list is empty." << endl;
         return;
     }
 
-    cout << "\n--- Waiting List ---" << endl;
+    std::cout << "\n--- Waiting List ---" << endl;
 
-    while(list.students.empty()){
-        cout << "Student: " << list.students.front().name << " | Resource ID: " << list.students.front().resoruceID << endl;
-        list.students.pop();
+    auto studentCopy = list.students;
+
+    while(!studentCopy.empty()){
+        const Student& student = studentsCopy.front();
+
+        
+        std::cout << "Student: " << student.name << " | Resource ID: " << student.resoruceID << std::endl;
+        
+        studentsCopy.pop();
     }
 }
 
