@@ -17,6 +17,9 @@ class ResourceManager{
 	public:
 		vector<Resource> createVector(ifstream& ResrcFile);
 		void Print(vector<Resource> prntVec);
+		Resource SearchByID(vector<Resource> srchVect, string targetID);
+		void SortByName(vector<Resource> sortVectN);
+		void SortByType(vector<Resource> sortVectT);
 	
 	private:
 		
