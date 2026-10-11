@@ -63,15 +63,16 @@ int main (){
 
 		cout << "<<<  Campus Resource Reservation System  >>>" << endl;
 		cout << "1. View Resources                           " << endl;
-		cout << "2. Create Reservation                       " << endl;
-		cout << "3. Cancel Reservation                       " << endl;
-		cout << "4. Add Students to Waiting List             " << endl;
-		cout << "5. Remove Students from Waiting List        " << endl;
-		cout << "6. Display Waiting List                     " << endl;
-		cout << "7. Restore Cancellation                     " << endl;
-		cout << "8. Display Cancellation History             " << endl;
-		cout << "9. Sort Resources                           " << endl;
-		cout << "10. Generate Report                          " << endl;
+		cout << "2. Search Resources                         " << endl;
+		cout << "3. Create Reservation                       " << endl;
+		cout << "4. Cancel Reservation                       " << endl;
+		cout << "5. Add Students to Waiting List             " << endl;
+		cout << "6. Remove Students from Waiting List        " << endl;
+		cout << "7. Display Waiting List                     " << endl;
+		cout << "8. Restore Cancellation                     " << endl;
+		cout << "9. Display Cancellation History             " << endl;
+		cout << "10. Sort Resources                           " << endl;
+		cout << "11. Generate Report                          " << endl;
 		cout << "0. Exit                                     " << endl << endl;
 		
 		cout << "Enter your choice: ";
@@ -84,13 +85,36 @@ int main (){
 		}
 		else if(choice == 2){
 			
+			string resrcID;
+			Resource tempResource;
 			
+			cout << "Enter Resource ID (ex: R100): " << endl;
+			cin >> resrcID;
+			
+			tempResource = resrcMan.SearchByID(resrcVect, resrcID);
+			
+			int i;
+	
+			cout << endl;
+			cout << "+----------------------------------------------------------------------------+" << endl;
+			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
+			cout << "|----------------------------------------------------------------------------|" << endl;
+			cout << left << "|" << setw(12) << tempResource.GetID() << "|";
+			cout << setw(17) << tempResource.GetName() << "|";
+			cout << setw(21) << tempResource.GetType() << "|";
+			cout << setw(23) << tempResource.GetStatus() << "|" << endl;
+			cout << "+----------------------------------------------------------------------------+" << endl << endl;
+
 		}
 		else if(choice == 3){
 			
 			
 		}
 		else if(choice == 4){
+			
+			
+		}
+		else if(choice == 5){
 			string studentName;
 			int resourceID;
 
@@ -102,21 +126,21 @@ int main (){
 
 			addStudent(list, studentName, resourceID);	
 		}
-		else if(choice == 5){
+		else if(choice == 6){
 			removeStudent(list);
 		}
-		else if(choice == 6){
+		else if(choice == 7){
 			displayWaitingList(list);	
 		}
-		else if(choice == 7){
+		else if(choice == 8){
 			Reservation restored = restoreReservation(history);
 			
 		}
-		else if(choice == 8){
+		else if(choice == 9){
 			displayCancellationHistory(history);
 			
 		}
-		else if((choice < 0) || (choice > 10)){
+		else if(choice != 0)){
 			
 			cout << "Invalid System Choice." << endl << endl;
 			
