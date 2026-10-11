@@ -18,10 +18,8 @@ class ResourceManager{
 		vector<Resource> createVector(ifstream& ResrcFile);
 		void Print(vector<Resource> prntVec);
 		Resource SearchByID(vector<Resource> srchVect, string targetID);
-		void SortByName(vector<Resource> sortVectN);
-		void SortByType(vector<Resource> sortVectT);
-	
-	private:
+		void sort(string choice, vector<Resource>& sortVectI, int left, int right);
+		void merge(string choice, vector<Resource>& sortVectI, int left, int mid, int right);
 		
 
 };
