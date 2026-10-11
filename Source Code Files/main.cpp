@@ -272,7 +272,12 @@ int main (){
 			
 		}
 		else if(choice == "10"){
-			
+			cout << "Total students waiting: " << countWaitingStudents(list) << endl;
+
+			for(const auto& resource : resrcVect) {
+				int waiting = countWaitingForResource(list, resource.GetID());
+
+				cout << resource.GetID() << ": " << waiting << " student(s) waiting" << endl;
 			
 		}
 			
