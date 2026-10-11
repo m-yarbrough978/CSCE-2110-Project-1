@@ -233,8 +233,7 @@ int main (){
 			
 		}
 		else if(choice == "4"){
-			string studentName;
-			int resourceID;
+			string studentName, resourceID;
 
 			cout << "Enter student name: ";
 			cin >> studentName;
