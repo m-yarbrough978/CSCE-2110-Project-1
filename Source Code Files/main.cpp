@@ -52,38 +52,41 @@ int main (){
 	}
 	
 	vector<Resource> resrcVect;
+	vector<Resource> IDsortedResrcVec;
 	ResourceManager resrcMan;
 
 	resrcVect = resrcMan.createVector(ResrcFile);
+	IDsortedResrcVec = resrcVect;
 
 	int choice;
 	
 	do{
 		
-
+		cout << endl;
 		cout << "<<<  Campus Resource Reservation System  >>>" << endl;
 		cout << "1. View Resources                           " << endl;
 		cout << "2. Search Resources                         " << endl;
-		cout << "3. Create Reservation                       " << endl;
-		cout << "4. Cancel Reservation                       " << endl;
-		cout << "5. Add Students to Waiting List             " << endl;
-		cout << "6. Remove Students from Waiting List        " << endl;
-		cout << "7. Display Waiting List                     " << endl;
-		cout << "8. Restore Cancellation                     " << endl;
-		cout << "9. Display Cancellation History             " << endl;
-		cout << "10. Sort Resources                           " << endl;
-		cout << "11. Generate Report                          " << endl;
+		cout << "3. Sort Resources                           " << endl;
+		cout << "4. Create Reservation                       " << endl;
+		cout << "5. Cancel Reservation                       " << endl;
+		cout << "6. Add Students to Waiting List             " << endl;
+		cout << "7. Remove Students from Waiting List        " << endl;
+		cout << "8. Display Waiting List                     " << endl;
+		cout << "9. Restore Cancellation                     " << endl;
+		cout << "10. Display Cancellation History            " << endl;
+		cout << "11. Sort Resources                          " << endl;
+		cout << "12. Generate Report                         " << endl;
 		cout << "0. Exit                                     " << endl << endl;
 		
 		cout << "Enter your choice: ";
 		cin >> choice;
 		
-		if(choice == 1){
+		if(choice == "1"){
 
 			resrcMan.Print(resrcVect);
 			
 		}
-		else if(choice == 2){
+		else if(choice == "2"){
 			
 			string resrcID;
 			Resource tempResource;
@@ -92,8 +95,6 @@ int main (){
 			cin >> resrcID;
 			
 			tempResource = resrcMan.SearchByID(resrcVect, resrcID);
-			
-			int i;
 	
 			cout << endl;
 			cout << "+----------------------------------------------------------------------------+" << endl;
@@ -106,15 +107,39 @@ int main (){
 			cout << "+----------------------------------------------------------------------------+" << endl << endl;
 
 		}
-		else if(choice == 3){
+		else if(choice == "3"){
+
+			cout << endl;
+			cout << "What would you like to sort by?" << endl;
+			cout << "I - ID" << endl;
+			cout << "N - Name" << endl;
+			cout << "T - Type" << endl;
+			cout << "A - Availability" << endl;
+			
+			cin >> choice;
+			
+			if((choice == "I") || (choice == "i") || (choice == "N") || (choice == "n") || (choice == "T") || (choice == "t") || (choice == "A") || (choice == "a")){
+				
+				resrcMan.sort(choice, resrcVect, 0, 19);
+				cout << endl << "Use Menu Option 1 to view the sorted resources." << endl;
+				
+			}
+			else{
+				
+				cout << endl << "Invalid Resource Identifier." << endl;
+				
+			}
+			
+		}
+		else if(choice == "4"){
+
+
+		}
+		else if(choice == "5"){
 			
 			
 		}
-		else if(choice == 4){
-			
-			
-		}
-		else if(choice == 5){
+		else if(choice == "6"){
 			string studentName;
 			int resourceID;
 
@@ -126,27 +151,27 @@ int main (){
 
 			addStudent(list, studentName, resourceID);	
 		}
-		else if(choice == 6){
+		else if(choice == "7"){
 			removeStudent(list);
 		}
-		else if(choice == 7){
+		else if(choice == "8"){
 			displayWaitingList(list);	
 		}
-		else if(choice == 8){
+		else if(choice == "9"){
 			Reservation restored = restoreReservation(history);
 			
 		}
-		else if(choice == 9){
+		else if(choice == "10"){
 			displayCancellationHistory(history);
 			
 		}
-		else if(choice != 0)){
+		else if(choice != "0")){
 			
-			cout << "Invalid System Choice." << endl << endl;
+			cout << "Invalid System Choice." << endl;
 			
 		}
 		
-	}while(choice != 0);
+	}while(choice != "0");
   
  
 	cout << "Thank you for using the Campus Reservation system. Goodbye!" << endl;
