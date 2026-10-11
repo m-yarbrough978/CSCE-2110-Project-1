@@ -252,15 +252,15 @@ int main (){
 		else if(choice == "7"){
 			Reservation restored = restoreReservation(history);
 
-			ReservatopmStatus = resrvList.restoreReservation(restored);
+			ReservationStatus status = resrvList.restoreReservation(restored);
 
 			if(status == RES_OK) {
-				cout << "Reservation restored successfully." endl;
+				cout << "Reservation restored successfully." << endl;
 			}
 			else {
 				cout << "Restoration failed: " << ReservationManager::statusMessage(status) << endl;
 
-				history.reservations.push(restored)
+				history.reservations.push(restored);
 			
 		}
 		else if(choice == "8"){
@@ -279,6 +279,7 @@ int main (){
 
 				cout << resource.GetID() << ": " << waiting << " student(s) waiting" << endl;
 			
+			}
 		}
 			
 		else if(choice != "0"){
