@@ -14,8 +14,15 @@ When the program starts, a text box introducing the contributors pops up. The pr
 - Display cancellation history
 - Sort resources
 - Generate a system report
-## How the Program Works
+## How The Program Works
 The program works by creating header and source files for different parts of the program (i.e. Waiting.h and Waiting.cpp) and then calling the functions defined in those files from main.cpp.
+## Build/Run Instructions
+*These build/run instructions assume that you are using Windows PowerShell and MinGw to compile.*
+### Build
+g++ main.cpp Resource.h Resource.cpp Reservation.h Reservation.cpp ReservationManager.h ReservationManager.cpp ReservationList.h ReservationList.cpp Waiting.h Waiting.cpp CancellationHistory.h CancellationHistory.cpp ResourceManager.h ResourceManager.cpp -o
+CampResrcResSys.exe
+### Run
+.\CampResrcResSys.exe
 ## Team Members 
 - Micah Yarbrough
 - Dabira Olubobola
