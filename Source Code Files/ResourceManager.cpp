@@ -170,13 +170,203 @@ Resource ResourceManager::SearchByID(vector<Resource> srchVect, string targetID)
 }
 
 
-void ResourceManager::SortByName(vector<Resource> sortVectN){
+void ResourceManager::sort(string choice, vector<Resource>& sortVect, int left, int right){
 	
+	if (left >= right){
+		
+		return;
+		
+	}
+
+    int mid = left + (right - left) / 2;
+
+    sort(choice, sortVect, left, mid);
+
+    sort(choice, sortVect, mid + 1, right);
+
+    merge(choice, sortVect, left, mid, right);
 	
 }
 
 
-void ResourceManager::SortByType(vector<Resource> sortVectT){
+void ResourceManager::merge(string choice, vector<Resource>& sortVect, int left, int mid, int right){
+
+    int n1 = mid - left + 1;
+
+    int n2 = right - mid;
 	
+	int i, j;
+
+    vector<Resource> leftVect(n1);
+
+    vector<Resource> rightVect(n2);
+
+
+    for(i = 0; i < n1; ++i){
+
+        leftVect[i] = sortVect[left + i];
+		
+	}
+
+    for(j = 0; j < n2; ++j){
+
+        rightVect[j] = sortVect[mid + 1 + j];
+		
+	}
+
+
+    i = 0;
+	j = 0;
+	int k = left;
+
+	if((choice == "I") || (choice == "i")){
 	
+		while(i < n1 && j < n2){
+
+			if(leftVect[i].GetID() <= rightVect[j].GetID()){ 
+		
+				sortVect[k] = leftVect[i];
+				++i;
+				
+			}
+			else{
+			
+				sortVect[k] = rightVect[j];
+				++j; 
+				
+			}
+	
+			++k;
+		}
+
+		while(i < n1){
+	
+			sortVect[k] = leftVect[i]; 
+			++i; 
+			++k; 
+			
+		}
+
+		while(j < n2){ 
+	
+			sortVect[k] = rightVect[j];
+			++j;
+			++k;
+			
+		}
+		
+	}
+	else if((choice == "N") || (choice == "n")){
+		
+		while(i < n1 && j < n2){
+
+			if(leftVect[i].GetName() <= rightVect[j].GetName()){ 
+		
+				sortVect[k] = leftVect[i];
+				++i;
+				
+			}
+			else{
+			
+				sortVect[k] = rightVect[j];
+				++j; 
+				
+			}
+
+			++k;
+		}
+
+		while(i < n1){
+	
+			sortVect[k] = leftVect[i]; 
+			++i; 
+			++k; 
+			
+		}
+
+		while(j < n2){ 
+	
+			sortVect[k] = rightVect[j];
+			++j;
+			++k;
+			
+		}
+		
+	}
+	else if((choice == "T") || (choice == "t")){
+		
+		while(i < n1 && j < n2){
+
+			if(leftVect[i].GetType() <= rightVect[j].GetType()){ 
+		
+				sortVect[k] = leftVect[i]; 
+				++i;
+				
+			}
+			else{
+				
+				sortVect[k] = rightVect[j];
+				++j; 
+				
+			}
+
+			++k;
+		}
+
+		while(i < n1){
+	
+			sortVect[k] = leftVect[i]; 
+			++i; 
+			++k; 
+			
+		}
+
+		while(j < n2){ 
+	
+			sortVect[k] = rightVect[j];
+			++j;
+			++k;
+			
+		}
+		
+	}
+	else if((choice == "A") || (choice == "a")){
+		
+		while(i < n1 && j < n2){
+
+			if(leftVect[i].GetStatus() <= rightVect[j].GetStatus()){ 
+		
+				sortVect[k] = leftVect[i];
+				++i;
+				
+			}
+			else{
+				
+				sortVect[k] = rightVect[j];
+				++j; 
+				
+			}
+			
+			++k;
+			
+		}
+
+		while(i < n1){
+	
+			sortVect[k] = leftVect[i]; 
+			++i; 
+			++k; 
+			
+		}
+
+		while(j < n2){ 
+		
+			sortVect[k] = rightVect[j];
+			++j;
+			++k;
+			
+		}
+		
+	}
+
 }
