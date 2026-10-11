@@ -134,3 +134,49 @@ void ResourceManager::Print(vector<Resource> prntVec){
 	cout << "+----------------------------------------------------------------------------+" << endl << endl;
 	
 }
+
+
+Resource ResourceManager::SearchByID(vector<Resource> srchVect, string targetID){
+	
+	Resource srchResrc;
+	
+	int left = 0;
+	int right = 19;
+	
+	while (left <= right) {
+		
+		int mid = left + (right - left) / 2;
+
+        if (srchVect[mid].GetID() == targetID){
+			
+			srchResrc = srchVect[mid];
+			break;
+			
+		}
+        else if (srchVect[mid].GetID() < targetID){
+			
+			left = mid + 1;
+			
+		}
+        else{
+			
+           right = mid - 1;
+		   
+		}
+    }
+	
+	
+	return srchResrc;
+}
+
+
+void ResourceManager::SortByName(vector<Resource> sortVectN){
+	
+	
+}
+
+
+void ResourceManager::SortByType(vector<Resource> sortVectT){
+	
+	
+}
