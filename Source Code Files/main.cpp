@@ -204,10 +204,15 @@ int main (){
 			cout << endl << "Enter end hour: ";
 			cin >> endHour;
 			
-			resrvList.createReservation(studentID, resourceID, date, startHour, endHour, newIDOut);
-			
-			++newIDOut;
-			
+			ReservationStatus status = resrvList.createReservation(
+				studentID, resourceID, date, startHour, endHour, newIDOut);
+
+			cout << ReservationManager::statusMessage(status) << endl;
+
+			if(status == RES_OK) { 
+				cout << "Reservation ID: " << newIDOut << endl;
+			}
+		
 			cout << endl;
 			
 		}
@@ -217,11 +222,13 @@ int main (){
 			
 			cout << endl << "Enter reservation ID: ";
 			cin >> resrvID;
-			
-			resrvList.cancelReservation(resrvID, cancelledOut);
-			
-			--newIDOut;
-			
+			ReservationStatus status = resrvList.cancelReservation(resrvID, cancelledOut);
+
+			cout << ReservationManager::statusMessage(status) << endl;
+
+			if(status == RES_OK) {
+				storeCancellationReservation(history, cancelledOut);
+				
 			cout << endl;
 			
 		}
@@ -245,6 +252,16 @@ int main (){
 		}
 		else if(choice == "7"){
 			Reservation restored = restoreReservation(history);
+
+			ReservatopmStatus = resrvList.restoreReservation(restored);
+
+			if(status == RES_OK) {
+				cout << "Reservation restored successfully." endl;
+			}
+			else {
+				cout << "Restoration failed: " << ReservationManager::statusMessage(status) << endl;
+
+				history.reservations.push(restored)
 			
 		}
 		else if(choice == "8"){
