@@ -5,11 +5,9 @@ using namespace std;
 
 void storeCancelledReservation(CancellationHistory& history, Reservation reservation)
 {
-  //doesn't keep old linked-list value
-  reservation.next = nullptr;
   history.reservations.push(reservation);
 
-  cout << "Reservation " << reservation.id << " was added to cancellation history." << endl;
+  cout << "Reservation " << reservation.getReservationId() << " was added to cancellation history." << endl;
 }
 
 Reservation restoreReservation(CancellationHistory& history)
@@ -17,21 +15,20 @@ Reservation restoreReservation(CancellationHistory& history)
   if(history.reservations.empty()){
     cout << "There are no cancelled reservations to restore." << endl;
 
-    Reservation emptyReservation = {};
+    Reservation emptyReservation;
     return emptyReservation;
   }
 
   Reservation restored = history.reservations.top();
 
   history.reservations.pop();
-  restored.next = nullptr;
 
-  cout << "Reservation " << restored.id << " was restored." << endl;
+  cout << "Reservation " << restored.getReservationId() << " was restored." << endl;
 
   return restored;
 }
 
-void displayCancellationHistory(CancellationHistory history)
+void displayCancellationHistory(CancellationHistory& history)
 {
   if(history.reservations.empty()){
     std::cout << "No cancellation history." << endl;

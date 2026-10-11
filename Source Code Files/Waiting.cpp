@@ -1,11 +1,9 @@
 #include "Waiting.h"
 #include <iostream>
 /* 
-
 Add student to waiting list : add students to created waiting list (function)
 Remove student from waiting list : remove students from created waiting list (function)
 Display waiting list : use a print statement to display created waiting list (print Display)
-
 */
 using namespace std;
 
@@ -29,7 +27,7 @@ void removeStudent(Waiting& list)
     }
 
     cout << list.students.front().name << " was removed from the waiting list." << endl;
-    list students.pop();
+    list.students.pop();
 }
 
 void displayWaitingList(Waiting& list)
@@ -53,6 +51,27 @@ void displayWaitingList(Waiting& list)
     }
 }
 
+int countWaitingForResource(const Waiting& list, const std::string& resourceID) {
+    int count = 0;
+
+    // Copy the queue so the original waiting list is preserved.
+   queue<Student> studentsCopy = list.students;
+
+    while(!studentsCopy.empty()) {
+        if(studentsCopy.front().resourceID == resourceID) {
+            ++count;
+        }
+
+        studentsCopy.pop();
+    }
+
+    return count;
+}
+
+//Count all students in the waiting list.
+int countWaitingStudents(const Waiting& list){
+    return static_cast<int>(list.students.size());
+}
 
 
 
