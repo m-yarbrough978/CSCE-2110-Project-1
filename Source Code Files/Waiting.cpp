@@ -45,7 +45,7 @@ void displayWaitingList(Waiting& list)
         const Student& student = studentsCopy.front();
 
         
-        std::cout << "Student: " << student.name << " | Resource ID: " << student.resoruceID << std::endl;
+        std::cout << "Student: " << student.name << " | Resource ID: " << student.resourceID << std::endl;
         
         studentsCopy.pop();
     }
