@@ -46,6 +46,22 @@ void displayWaitingList(Waiting& list)
     }
 }
 
+int countWaitingForResource(const Waiting& list, const std::string& resourceID) {
+    int count = 0;
+
+    // Copy the queue so the original waiting list is preserved.
+    auto studentsCopy = list.students;
+
+    while(!studentsCopy.empty()) {
+        if(studentsCopy.front().resourceID == resourceID) {
+            ++count;
+        }
+
+        studentsCopy.pop();
+    }
+
+    return count;
+}
 
 
 
