@@ -170,6 +170,7 @@ int main (){
 
 			if(status == RES_OK) {
 				storeCancelledReservation(history, cancelledOut);
+			}
 				
 			cout << endl;
 			
@@ -203,6 +204,7 @@ int main (){
 				cout << "Restoration failed: " << ReservationManager::statusMessage(status) << endl;
 
 				history.reservations.push(restored);
+			}
 			
 		}
 		else if(choice == "10"){
@@ -213,7 +215,7 @@ int main (){
 			//generate report
 			
 		}
-		else if(choice != "0")){
+		else if(choice != "0"){
 			
 			cout << "Invalid System Choice." << endl;
 			
