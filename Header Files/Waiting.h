@@ -3,12 +3,12 @@
 
 #include <string>
 #include <queue>
-using namespace std;
+
 
 struct Student
 {
-  string name;  
-  int resourceID;
+  std::string name;  
+  std::string resourceID;
 };
 
 struct Waiting
@@ -16,7 +16,7 @@ struct Waiting
   queue<Student> students;
 };
 
-void addStudent(Waiting& list, string name, int resourceID);
+void addStudent(Waiting& list, std::string name, std::string resourceID);
 void removeStudent(Waiting& list);
 void displayWaitingList(Waiting& list);
 
