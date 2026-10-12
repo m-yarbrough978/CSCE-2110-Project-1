@@ -41,7 +41,7 @@ void displayCancellationHistory(CancellationHistory& history)
   auto historyCopy = history.reservations;
   
   while(!historyCopy.empty()){
-    historyCopy.top.display();
+    historyCopy.top().display();
     historyCopy.pop();
   }
 }
