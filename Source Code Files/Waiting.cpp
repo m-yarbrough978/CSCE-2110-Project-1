@@ -7,7 +7,7 @@ Display waiting list : use a print statement to display created waiting list (pr
 */
 using namespace std;
 
-void addStudent(Waiting& list, string name, int resourceID)
+void addStudent(Waiting& list, string name, string resourceID)
 {
     Student student;
 
