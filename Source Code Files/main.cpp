@@ -60,6 +60,7 @@ int main (){
 
 	string choice;
 	int newIDOut = 0;
+	int numOfRes = 0;
 	
 	do{
 		
@@ -153,6 +154,7 @@ int main (){
 
 			if(status == RES_OK) { 
 				cout << "Reservation ID: " << newIDOut << endl;
+				++numOfRes;
 			}
 		
 			cout << endl;
@@ -170,6 +172,7 @@ int main (){
 
 			if(status == RES_OK) {
 				storeCancelledReservation(history, cancelledOut);
+				--numOfRes;
 			}
 				
 			cout << endl;
@@ -212,7 +215,55 @@ int main (){
 			
 		}
 		else if(choice == "11"){
-			//generate report
+			
+			cout << "What type of report?" << endl;
+			cout << "W - Number of people in waiting list" << endl;
+			cout << "R - Number of active reservations" << endl;
+			cin >> choice;
+			
+			if((choice == "W") || (choice == "w")){
+			
+				int numOfWaitStus;
+				numOfWaitStus = countWaitingStudents(list);
+				
+				if(numOfWaitStus == 1){
+					
+					cout << "There is " << numOfWaitStus << " person in the waiting list." << endl;
+					
+				}
+				else if(numOfWaitStus == 0){
+					
+					cout << "There is no one in the waiting list." << endl;	
+				}
+				else{
+					
+					cout << "There are " << numOfWaitStus << " people in the waiting list." << endl;
+				}
+				
+			}
+			else if((choice == "R") || (choice == "r")){
+				
+				if(numOfRes == 1){
+					
+					cout << "There is " << numOfRes << " active reservation." << endl;
+					
+				}
+				else if(numOfRes == 0){
+					
+					cout << "There are no active reservations." << endl;
+					
+				}
+				else{
+					
+					cout << "There are " << numOfRes << " active reservations." << endl;
+					
+				}
+			}
+			else{
+				
+				cout << endl << "Invalid Report Type." << endl;
+				
+			}
 			
 		}
 		else if(choice != "0"){
