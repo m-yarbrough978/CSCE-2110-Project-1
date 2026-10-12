@@ -13,6 +13,6 @@ void storeCancelledReservation(CancellationHistory& history, Reservation reserva
 
 Reservation restoreReservation(CancellationHistory& history);
 
-void displayCancellationHistory(const CancellationHistory& history);
+void displayCancellationHistory(CancellationHistory& history);
 
 #endif
