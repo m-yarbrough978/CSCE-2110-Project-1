@@ -182,7 +182,8 @@ int main (){
 			string studentName, resourceID;
 
 			cout << "Enter student name: ";
-			cin >> studentName;
+			getline(cin, studentName);
+			getline(cin, studentName);
 
 			cout << "Enter resource ID: ";
 			cin >> resourceID;
