@@ -42,12 +42,12 @@ void displayWaitingList(Waiting& list)
     auto studentCopy = list.students;
 
     while(!studentCopy.empty()){
-        const Student& student = studentsCopy.front();
+        const Student& student = studentCopy.front();
 
         
         std::cout << "Student: " << student.name << " | Resource ID: " << student.resourceID << std::endl;
         
-        studentsCopy.pop();
+        studentCopy.pop();
     }
 }
 
