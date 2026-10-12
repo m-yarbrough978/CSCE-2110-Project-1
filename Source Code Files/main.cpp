@@ -14,60 +14,6 @@
 #include <limits> 
 using namespace std; 
 
-void mergeResources(vector<Resources>& resources, int left, int mid, int right)
-{
-	vector<Resource> temp;
-	int i = left;
-	int j = mid +1;
-
-	// Merge the two sorted halves
-	while(i <= mid && j <= right)
-	{
-		if(resources[i].GetName() <= resources[j].GetNmae())
-		{
-			temp.push_back(resources[i]);
-			++i;
-		}
-		else
-		{
-			temp.push_back(resources[j]);
-			++j;
-		}
-	}
-
-	// Copy any remaining resources from the left half
-	while (i <= mid)
-	{
-		temp.push_back(resources[i]);
-		++i;
-	}
-
-	// Copy any remaining resources from the right half
-	while (j <= right)
-	{
-		temp.push_back(resources[j]);
-		++j;
-	}
-	// Copy the merged resources back into the original vector.
-	for(int k =0; k < static_cast<int>(temp.size()); ++k)
-	{
-	resources[left+k] = temp[k];
-	}
-}
-
-void mergeSortResources(vector<Resource>& resources, int left, int right)
-{
-	if (left >= right)
-	{
-		return;
-	}
-
-	int mid = left +(right - left) / 2;
-
-	mergeSortResources(resources, left, mid);
-	mergeSortResources(resources, mid + 1, right);
-	mergeSortResources(resources, left, mid, right);
-}
 
 int main (){
 
@@ -115,6 +61,7 @@ int main (){
 
 	string choice;
 	int newIDOut = 0;
+	int numOfRes = 0;
 	
 	do{
 		
@@ -131,7 +78,6 @@ int main (){
 		cout << "9. Restore Cancellation                     " << endl;
 		cout << "10. Display Cancellation History            " << endl;
 		cout << "11. Sort Resources                          " << endl;
-		cout << "12. Generate Report                         " << endl;
 		cout << "0. Exit                                     " << endl << endl;
 		
 		cout << "Enter your choice: ";
@@ -186,10 +132,8 @@ int main (){
 				
 			}
 			
-			cout << "+----------------------------------------------------------------------------+" << endl << endl;
-			
 		}
-		else if(choice == "2"){
+		else if(choice == "4"){
 			string studentID, resourceID, date;
 			int startHour, endHour;
 			
@@ -211,12 +155,13 @@ int main (){
 
 			if(status == RES_OK) { 
 				cout << "Reservation ID: " << newIDOut << endl;
+				++numOfRes;
 			}
 		
 			cout << endl;
 			
 		}
-		else if(choice == "3"){
+		else if(choice == "5"){
 			int resrvID;
 			Reservation cancelledOut;
 			
@@ -228,11 +173,13 @@ int main (){
 
 			if(status == RES_OK) {
 				storeCancelledReservation(history, cancelledOut);
+				--numOfRes;
+			}
 				
 			cout << endl;
 			
 		}
-		else if(choice == "4"){
+		else if(choice == "6"){
 			string studentName, resourceID;
 
 			cout << "Enter student name: ";
@@ -243,13 +190,13 @@ int main (){
 
 			addStudent(list, studentName, resourceID);	
 		}
-		else if(choice == "5"){
+		else if(choice == "7"){
 			removeStudent(list);
 		}
-		else if(choice == "6"){
+		else if(choice == "8"){
 			displayWaitingList(list);	
 		}
-		else if(choice == "7"){
+		else if(choice == "9"){
 			Reservation restored = restoreReservation(history);
 
 			ReservationStatus status = resrvList.restoreReservation(restored);
@@ -265,6 +212,58 @@ int main (){
 		}
 		else if(choice == "10"){
 			displayCancellationHistory(history);
+			
+		}
+		else if(choice == "11"){
+			
+			cout << "What type of report?" << endl;
+			cout << "W - Number of people in waiting list" << endl;
+			cout << "R - Number of active reservations" << endl;
+			cin >> choice;
+			
+			if((choice == "W") || (choice == "w")){
+			
+				int numOfWaitStus;
+				numOfWaitStus = countWaitingStudents(list);
+				
+				if(numOfWaitStus == 1){
+					
+					cout << "There is " << numOfWaitStus << " person in the waiting list." << endl;
+					
+				}
+				else if(numOfWaitStus == 0){
+					
+					cout << "There is no one in the waiting list." << endl;	
+				}
+				else{
+					
+					cout << "There are " << numOfWaitStus << " people in the waiting list." << endl;
+				}
+				
+			}
+			else if((choice == "R") || (choice == "r")){
+				
+				if(numOfRes == 1){
+					
+					cout << "There is " << numOfRes << " active reservation." << endl;
+					
+				}
+				else if(numOfRes == 0){
+					
+					cout << "There are no active reservations." << endl;
+					
+				}
+				else{
+					
+					cout << "There are " << numOfRes << " active reservations." << endl;
+					
+				}
+			}
+			else{
+				
+				cout << endl << "Invalid Report Type." << endl;
+				
+			}
 			
 		}
 		else if(choice != "0")){
