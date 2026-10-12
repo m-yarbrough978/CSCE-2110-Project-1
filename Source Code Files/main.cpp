@@ -228,16 +228,16 @@ int main (){
 				
 				if(numOfWaitStus == 1){
 					
-					cout << "There is " << numOfWaitStus << " person in the waiting list." << endl;
+					cout << endl <<"There is " << numOfWaitStus << " person in the waiting list." << endl;
 					
 				}
 				else if(numOfWaitStus == 0){
 					
-					cout << "There is no one in the waiting list." << endl;	
+					cout << endl <<"There is no one in the waiting list." << endl;	
 				}
 				else{
 					
-					cout << "There are " << numOfWaitStus << " people in the waiting list." << endl;
+					cout << endl << "There are " << numOfWaitStus << " people in the waiting list." << endl;
 				}
 				
 			}
@@ -245,17 +245,17 @@ int main (){
 				
 				if(numOfRes == 1){
 					
-					cout << "There is " << numOfRes << " active reservation." << endl;
+					cout << endl << "There is " << numOfRes << " active reservation." << endl;
 					
 				}
 				else if(numOfRes == 0){
 					
-					cout << "There are no active reservations." << endl;
+					cout << endl << "There are no active reservations." << endl;
 					
 				}
 				else{
 					
-					cout << "There are " << numOfRes << " active reservations." << endl;
+					cout << endl << "There are " << numOfRes << " active reservations." << endl;
 					
 				}
 			}
@@ -268,7 +268,7 @@ int main (){
 		}
 		else if(choice != "0"){
 			
-			cout << "Invalid System Choice." << endl;
+			cout << endl << "Invalid System Choice." << endl;
 			
 		}
 		
