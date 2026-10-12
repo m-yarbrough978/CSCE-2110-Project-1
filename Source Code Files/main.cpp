@@ -92,21 +92,29 @@ int main (){
 			string resrcID;
 			Resource tempResource;
 			
-			cout << "Enter Resource ID (ex: R100): " << endl;
+			cout << "Enter Resource ID (ex: R101): " << endl;
 			cin >> resrcID;
 			
-			tempResource = resrcMan.SearchByID(IDsortedResrcVec, resrcID);
+			if((resrcID < "R101") || (resrcID > "R120")){
+				
+				cout << endl << "Invalid Resource ID." << endl;
+				
+			}
+			else{
+			
+				tempResource = resrcMan.SearchByID(IDsortedResrcVec, resrcID);
 	
-			cout << endl;
-			cout << "+----------------------------------------------------------------------------+" << endl;
-			cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
-			cout << "|----------------------------------------------------------------------------|" << endl;
-			cout << left << "|" << setw(12) << tempResource.GetID() << "|";
-			cout << setw(17) << tempResource.GetName() << "|";
-			cout << setw(21) << tempResource.GetType() << "|";
-			cout << setw(23) << tempResource.GetStatus() << "|" << endl;
-			cout << "+----------------------------------------------------------------------------+" << endl << endl;
-
+				cout << endl;
+				cout << "+----------------------------------------------------------------------------+" << endl;
+				cout << "|Resource ID |  Resource Name  |    Resource Type    | Resource Availability |" << endl;
+				cout << "|----------------------------------------------------------------------------|" << endl;
+				cout << left << "|" << setw(12) << tempResource.GetID() << "|";
+				cout << setw(17) << tempResource.GetName() << "|";
+				cout << setw(21) << tempResource.GetType() << "|";
+				cout << setw(23) << tempResource.GetStatus() << "|" << endl;
+				cout << "+----------------------------------------------------------------------------+" << endl << endl;
+			}
+		
 		}
 		else if(choice == "3"){
 
